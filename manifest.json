@@ -1,0 +1,17 @@
+{
+    "manifest_version": 2,
+   
+    "name": "Canvas Dashboard Manager",
+    "version": "0.1.0",
+    "description": "Removes images from the Canvas dashboard cards",
+   
+    "content_scripts": [{
+      "css": ["style.css"],
+      "js": ["jquery-3.3.1.min.js", "canvas.js"],
+      "matches": ["https://canvas.auckland.ac.nz/*"]
+    }],
+
+    "browser_action": {
+        // "default_icon": "icon.png"
+    }
+  }
