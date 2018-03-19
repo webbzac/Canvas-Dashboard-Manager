@@ -1,3 +1,12 @@
 .ic-DashboardCard__header_image {
     background-image: none !important;
 }
+
+.changeImage {
+    margin-top: 15px !important;
+}
+
+.imageButton {
+    width: 100% !important;
+    margin-top: 5px !important;
+}
