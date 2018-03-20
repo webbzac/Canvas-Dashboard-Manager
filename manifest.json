@@ -11,6 +11,10 @@
       "matches": ["https://canvas.auckland.ac.nz/*"]
     }],
 
+    "permissions": [
+      "storage"
+    ],
+
     "browser_action": {
         // "default_icon": "icon.png"
     }
