@@ -31,6 +31,7 @@ $(function() {
         });
 
         $('.imageButton.original').click(function(){
+            $('.' + parentCard + ' .ic-DashboardCard__header_image').removeClass('noImage');
             chrome.storage.sync.get(['removedList'], function(result) {
                 var i = result.removedList.indexOf(parentCard);
                 if (i >= 0) {
@@ -42,6 +43,7 @@ $(function() {
         });
 
         $('.imageButton.remove').click(function(){
+            $('.' + parentCard + ' .ic-DashboardCard__header_image').addClass('noImage');
             chrome.storage.sync.get(['removedList'], function(result) {
                 if (result.removedList == '') {
                     value = [parentCard];
@@ -61,10 +63,6 @@ $(function() {
             chrome.storage.sync.set({removedList: []}, function() {
                 console.warn('List is wiped');
             });
-        });
-
-        $('.imageButton').click(function(){
-            refreshImages();
         });
     }
 
