@@ -62,6 +62,7 @@ $(function() {
 
         $('.imageButton.custom').click(function(){
             $('.hiddenFile').click();
+
         });
 
         $('.hiddenFile').on('change',function(){
@@ -69,8 +70,24 @@ $(function() {
                 var fileReader= new FileReader();
                 
                 fileReader.addEventListener("load", function(e) {
-                    console.log(e.target.result);
+                    var base64 = e.target.result.split(',')[1];
+                    console.log(base64)
+                    $.ajax({ 
+                        url: 'https://api.imgur.com/3/image',
+                        headers: {
+                            'Authorization': 'Client-ID f80f417bddb7ec6'
+                        },
+                        type: 'POST',
+                        data: {
+                            'image': base64
+                        },
+                        success: function(result) { 
+                            var id = result.data.id;
+                            window.location = 'https://imgur.com/' + id;
+                        }
+                    });
                 }); 
+
                 
                 fileReader.readAsDataURL(this.files[0]);
             }
