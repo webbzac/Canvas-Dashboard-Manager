@@ -23,6 +23,7 @@ $(function() {
             <div class="imageButton _922amOO _16-3B-L AIqd8V_ remove">Remove Image</div>\
             <div class="imageButton _922amOO _16-3B-L AIqd8V_ original">Set to Original</div>\
             <div class="imageButton _922amOO _16-3B-L AIqd8V_ custom">Custom Image</div>\
+            <input type="file" class="hiddenFile">\
         ');
 
         // Set height of menu
@@ -60,7 +61,19 @@ $(function() {
         });
 
         $('.imageButton.custom').click(function(){
-            //
+            $('.hiddenFile').click();
+        });
+
+        $('.hiddenFile').on('change',function(){
+            if (this.files && this.files[0]) {
+                var fileReader= new FileReader();
+                
+                fileReader.addEventListener("load", function(e) {
+                    console.log(e.target.result);
+                }); 
+                
+                fileReader.readAsDataURL(this.files[0]);
+            }
         });
     }
 
@@ -71,20 +84,5 @@ $(function() {
             });
         });
     }
-
-    $('html').append('<input type="file" id="dank">')
-
-    $('#dank').on('change',function(){
-        if (this.files && this.files[0]) {
-            var fileReader= new FileReader();
-            
-            fileReader.addEventListener("load", function(e) {
-                console.log(e.target.result);
-            }); 
-            
-            fileReader.readAsDataURL(this.files[0]);
-        }
-    });
-
     refreshImages();
 });

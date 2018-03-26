@@ -12,7 +12,7 @@
     }],
 
     "permissions": [
-      "storage"
+      "unlimitedStorage"
     ],
 
     "browser_action": {

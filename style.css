@@ -10,3 +10,7 @@
     width: 100% !important;
     margin-top: 5px !important;
 }
+
+.hiddenFile {
+    display: none;
+}
