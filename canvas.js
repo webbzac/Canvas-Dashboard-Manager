@@ -60,9 +60,7 @@ $(function() {
         });
 
         $('.imageButton.custom').click(function(){
-            chrome.storage.sync.set({removedList: []}, function() {
-                console.warn('List is wiped');
-            });
+            //
         });
     }
 
@@ -73,6 +71,20 @@ $(function() {
             });
         });
     }
+
+    $('html').append('<input type="file" id="dank">')
+
+    $('#dank').on('change',function(){
+        if (this.files && this.files[0]) {
+            var fileReader= new FileReader();
+            
+            fileReader.addEventListener("load", function(e) {
+                console.log(e.target.result);
+            }); 
+            
+            fileReader.readAsDataURL(this.files[0]);
+        }
+    });
 
     refreshImages();
 });
