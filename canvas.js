@@ -1,4 +1,6 @@
 $(function() {
+    // chrome.storage.local.clear();
+
     var cardNumber = 0;
 
     // Gives each Dashboard card a unique identifier
@@ -41,6 +43,12 @@ $(function() {
                     chrome.storage.sync.set({removedList: value});
                 }
             });
+
+            // Remove custom image from localStorage, and remove custom image class from element
+            chrome.storage.local.remove([parentCard], function (){
+                $('.' + parentCard + ' .ic-DashboardCard__header_image').removeClass(parentCard + 'background');
+            });
+
         });
 
         $('.imageButton.remove').click(function(){
@@ -58,37 +66,30 @@ $(function() {
                     }
                 }
             });
+
+            // Remove custom image from localStorage, and remove custom image class from element
+            chrome.storage.local.remove([parentCard], function (){
+                $('.' + parentCard + ' .ic-DashboardCard__header_image').removeClass(parentCard + 'background');
+            });
         });
 
         $('.imageButton.custom').click(function(){
             $('.hiddenFile').click();
-
         });
 
         $('.hiddenFile').on('change',function(){
             if (this.files && this.files[0]) {
                 var fileReader= new FileReader();
-                
                 fileReader.addEventListener("load", function(e) {
-                    var base64 = e.target.result.split(',')[1];
-                    console.log(base64)
-                    $.ajax({ 
-                        url: 'https://api.imgur.com/3/image',
-                        headers: {
-                            'Authorization': 'Client-ID f80f417bddb7ec6'
-                        },
-                        type: 'POST',
-                        data: {
-                            'image': base64
-                        },
-                        success: function(result) { 
-                            var id = result.data.id;
-                            window.location = 'https://imgur.com/' + id;
-                        }
-                    });
+                    var base64 = e.target.result
+                    console.log(base64);
+                    try {
+                        chrome.storage.local.set({[parentCard]: base64});
+                        refreshImages();
+                    } catch (err) {
+                        console.warn('Unable to save image!')
+                    }
                 }); 
-
-                
                 fileReader.readAsDataURL(this.files[0]);
             }
         });
@@ -99,6 +100,21 @@ $(function() {
             result.removedList.forEach(function(item) {
                 $('.' + item + ' .ic-DashboardCard__header_image').addClass('noImage');
             });
+        });
+
+        chrome.storage.local.get(function(result){
+            for (var key in result) {
+                $('.' + key + ' .ic-DashboardCard__header_image').removeClass('noImage');
+                $("<style>")
+                    .prop("type", "text/css")
+                    .html("\
+                        ." + key + "background {\
+                            background-image: url(" + result[key] + ") !important;\
+                        }")
+                .appendTo("head");
+
+                $('.' + key + ' .ic-DashboardCard__header_image').addClass(key + 'background');
+            }
         });
     }
     refreshImages();
