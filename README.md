@@ -23,3 +23,5 @@ See the [releases pages](https://github.com/webbzac/Canvas-Dashboard-Manager/rel
 ## License
 
 [MIT License](https://github.com/webbzac/Canvas-Dashboard-Manager/blob/master/LICENSE)
+
+*This extension is not affiliated with or represented by Canvas or Instructure Inc.*
