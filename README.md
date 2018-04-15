@@ -19,3 +19,7 @@ Canvas Dashboard Manager aims to solve this.
 ## Release History
 
 See the [releases pages](https://github.com/webbzac/Canvas-Dashboard-Manager/releases) for a history of releases and highlights for each release.
+
+## License
+
+[MIT License](https://github.com/webbzac/Canvas-Dashboard-Manager/blob/master/LICENSE)
