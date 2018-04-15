@@ -1,3 +1,4 @@
+![](https://github.com/webbzac/Canvas-Dashboard-Manager/blob/master/git-assets/cdbm_logo-small.png?raw=true)
 # Canvas Dashboard Manager
 **A Chome Extension that adds the basic missing tools to Canvas' Dashboard**
 
@@ -7,7 +8,7 @@ Canvas Dashboard Manager aims to solve this.
 
 ## Current Features
 
-* Adds aditional control to the the dashboard "card-view" context menu
+* Adds additional control to the the dashboard "card-view" context menu
 
 * Upload custom card background images
 
