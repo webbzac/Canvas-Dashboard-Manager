@@ -2,7 +2,7 @@
     "manifest_version": 2,
    
     "name": "Canvas Dashboard Manager",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Removes images from the Canvas dashboard cards",
    
     "content_scripts": [{
