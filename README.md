@@ -16,6 +16,10 @@ Canvas Dashboard Manager aims to solve this.
 
 * Reset to original view
 
+## Installation
+
+[Avaliable on the Chrome Web Store](https://chrome.google.com/webstore/detail/canvas-dashboard-manager/bckjdddllidjailfhfoepmlcfpagdajh)
+
 ## Release History
 
 See the [releases pages](https://github.com/webbzac/Canvas-Dashboard-Manager/releases) for a history of releases and highlights for each release.
