@@ -14,3 +14,66 @@
 .hiddenFile {
     display: none;
 }
+
+.popup {
+    padding: 20px;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.popup .logo {
+    width: 180px;
+}
+
+.popup .version {
+    font-style: italic;
+    color: grey;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.popup .button {
+    border-radius: 5px;
+    margin-top: 20px;
+    cursor: pointer;
+    line-height: 35px;
+    text-align: center;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 35px;
+    border: 1px solid black;
+    transition: all 0.2s;
+}
+
+.popup .button.red {
+    border: 1px solid rgb(223, 64, 49);
+    color: rgb(223, 64, 49);
+}
+
+.popup .button.red:hover {
+    background: rgb(223, 64, 49);
+    color: white;
+}
+
+.popup .iconFloat {
+    display: flex;
+    width: 70px;
+    justify-content: space-around;
+    height: 20px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 20px;
+}
+
+.popup .iconFloat img:focus {
+    outline: none;
+}
+
+.popup .iconFloat img {
+    width: 20px;
+    cursor: pointer;
+}

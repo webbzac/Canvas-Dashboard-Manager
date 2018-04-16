@@ -1,5 +1,6 @@
 $(function() {
     // chrome.storage.local.clear();
+    // chrome.storage.sync.clear();
 
     var cardNumber = 0;
 
@@ -54,7 +55,7 @@ $(function() {
         $('.imageButton.remove').click(function(){
             $('.' + parentCard + ' .ic-DashboardCard__header_image').addClass('noImage');
             chrome.storage.sync.get(['removedList'], function(result) {
-                if (result.removedList == '') {
+                if (result.removedList == undefined) {
                     value = [parentCard];
                     chrome.storage.sync.set({removedList: value});
 
@@ -97,9 +98,11 @@ $(function() {
 
     function refreshImages() {
         chrome.storage.sync.get(['removedList'], function(result) {
-            result.removedList.forEach(function(item) {
-                $('.' + item + ' .ic-DashboardCard__header_image').addClass('noImage');
-            });
+            if (result.removedList != undefined) {
+                result.removedList.forEach(function(item) {
+                    $('.' + item + ' .ic-DashboardCard__header_image').addClass('noImage');
+                });
+            }
         });
 
         chrome.storage.local.get(function(result){
@@ -118,4 +121,12 @@ $(function() {
         });
     }
     refreshImages();
+
+    // Popup menu (in Chrome extensions section):
+    $('.popup .button#clear').click(function(){
+        chrome.storage.local.clear();
+        chrome.storage.sync.clear();
+
+        console.log('CDBM: Cleared local and synced storage');
+    });
 });
