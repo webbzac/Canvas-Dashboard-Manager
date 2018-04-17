@@ -3,6 +3,7 @@ $(function() {
     // chrome.storage.sync.clear();
 
     var cardNumber = 0;
+        allowedFileTypes = ['jpg', 'jpeg', 'png', 'gif']
 
     // Gives each Dashboard card a unique identifier
     $('.ic-DashboardCard').each(function(){
@@ -80,18 +81,33 @@ $(function() {
 
         $('.hiddenFile').on('change',function(){
             if (this.files && this.files[0]) {
-                var fileReader= new FileReader();
-                fileReader.addEventListener("load", function(e) {
-                    var base64 = e.target.result
-                    console.log(base64);
-                    try {
-                        chrome.storage.local.set({[parentCard]: base64});
-                        refreshImages();
-                    } catch (err) {
-                        console.warn('Unable to save image!')
+
+                var extension = this.files[0].name.split('.').pop().toLowerCase()
+                    acceptedFile = allowedFileTypes.indexOf(extension) > -1;
+                
+                if (acceptedFile) {
+                    var fileReader= new FileReader();
+                    fileReader.addEventListener("load", function(e) {
+                        var base64 = e.target.result;
+                        try {
+                            chrome.storage.local.set({[parentCard]: base64});
+                            refreshImages();
+                        } catch (err) {
+                            console.warn('Unable to save image!')
+                        }
+                    }); 
+                    fileReader.readAsDataURL(this.files[0]);
+                } else {
+                    types = '';
+                    for (type in allowedFileTypes) {
+                        if (types == '') {
+                            types += allowedFileTypes[type]
+                        } else {
+                            types += ', ' + allowedFileTypes[type]
+                        }
                     }
-                }); 
-                fileReader.readAsDataURL(this.files[0]);
+                    alert('CDBM Error:\n\nFiletype not valid. \nValid filetypes are: ' + types)
+                }
             }
         });
     }
