@@ -24,19 +24,19 @@ $(function() {
         // Add Image buttons to menu
         $('.ColorPicker__Container').append('\
             <div class="changeImage _2xB3_kf">Image</div>\
-            <div class="imageButton _922amOO _16-3B-L AIqd8V_ remove">Remove Image</div>\
-            <div class="imageButton _922amOO _16-3B-L AIqd8V_ original">Set to Original</div>\
-            <div class="imageButton _922amOO _16-3B-L AIqd8V_ custom">Custom Image</div>\
+            <div class="imageButton _6q8Mxga _922amOO _16-3B-L AIqd8V_ jHMeNYB _39CmhEX remove">Remove Image</div>\
+            <div class="imageButton _6q8Mxga _922amOO _16-3B-L AIqd8V_ jHMeNYB _39CmhEX original">Set to Original</div>\
+            <div class="imageButton _6q8Mxga _922amOO _16-3B-L AIqd8V_ jHMeNYB _39CmhEX custom">Custom Image</div>\
             <input type="file" class="hiddenFile">\
         ');
 
         // Set height of menu
-        $('._2dovB3N').css({
+        $('._6q8Mxga > div').css({
             "height":400,
         });
 
         $('.imageButton.original').click(function(){
-            $('.' + parentCard + ' .ic-DashboardCard__header_image').removeClass('noImage');
+            $('.' + parentCard + ' .ic-DashboardCard__header_hero').removeClass('noImage');
             chrome.storage.sync.get(['removedList'], function(result) {
                 var i = result.removedList.indexOf(parentCard);
                 if (i >= 0) {
@@ -48,13 +48,13 @@ $(function() {
 
             // Remove custom image from localStorage, and remove custom image class from element
             chrome.storage.local.remove([parentCard], function (){
-                $('.' + parentCard + ' .ic-DashboardCard__header_image').removeClass(parentCard + 'background');
+                $('.' + parentCard + ' .ic-DashboardCard__header_hero').removeClass(parentCard + 'background');
             });
 
         });
 
         $('.imageButton.remove').click(function(){
-            $('.' + parentCard + ' .ic-DashboardCard__header_image').addClass('noImage');
+            $('.' + parentCard + ' .ic-DashboardCard__header_hero').addClass('noImage');
             chrome.storage.sync.get(['removedList'], function(result) {
                 if (result.removedList == undefined) {
                     value = [parentCard];
@@ -71,7 +71,7 @@ $(function() {
 
             // Remove custom image from localStorage, and remove custom image class from element
             chrome.storage.local.remove([parentCard], function (){
-                $('.' + parentCard + ' .ic-DashboardCard__header_image').removeClass(parentCard + 'background');
+                $('.' + parentCard + ' .ic-DashboardCard__header_hero').removeClass(parentCard + 'background');
             });
         });
 
@@ -84,7 +84,7 @@ $(function() {
 
                 var extension = this.files[0].name.split('.').pop().toLowerCase()
                     acceptedFile = allowedFileTypes.indexOf(extension) > -1;
-                
+
                 if (acceptedFile) {
                     var fileReader= new FileReader();
                     fileReader.addEventListener("load", function(e) {
@@ -95,7 +95,7 @@ $(function() {
                         } catch (err) {
                             console.warn('Unable to save image!')
                         }
-                    }); 
+                    });
                     fileReader.readAsDataURL(this.files[0]);
                 } else {
                     types = '';
@@ -116,33 +116,33 @@ $(function() {
         chrome.storage.sync.get(['removedList'], function(result) {
             if (result.removedList != undefined) {
                 result.removedList.forEach(function(item) {
-                    $('.' + item + ' .ic-DashboardCard__header_image').addClass('noImage');
+                    $('.' + item + ' .ic-DashboardCard__header_hero').addClass('noImage');
                 });
             }
         });
 
         chrome.storage.local.get(function(result){
             for (var key in result) {
-                $('.' + key + ' .ic-DashboardCard__header_image').removeClass('noImage');
-                $("<style>")
-                    .prop("type", "text/css")
-                    .html("\
-                        ." + key + "background {\
-                            background-image: url(" + result[key] + ") !important;\
-                        }")
-                .appendTo("head");
+                $('.' + key + ' .ic-DashboardCard__header_hero').removeClass('noImage');
 
-                $('.' + key + ' .ic-DashboardCard__header_image').addClass(key + 'background');
+                $('.' + key + ' .ic-DashboardCard__header_hero').css({
+                    'background-image':'url('+ result[key] + ')',
+                    'background-size':'cover',
+                    'background-position':'center'
+                });
+
+                $('.' + key + ' .ic-DashboardCard__header_hero').addClass(key + 'background');
             }
         });
     }
+    
     refreshImages();
 
     // Popup menu (in Chrome extensions section):
-    $('.popup .button#clear').click(function(){
+    $('.popup .button#clear').on('click', function() {
         chrome.storage.local.clear();
         chrome.storage.sync.clear();
 
-        console.log('CDBM: Cleared local and synced storage');
+        console.log('CDBM: Cleared local and synced storage'); //Appears only in 'Inspect Pop-up' view
     });
 });
