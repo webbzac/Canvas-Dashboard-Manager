@@ -20,7 +20,7 @@ Canvas Dashboard Manager aims to solve this.
 
 ## Installation
 
-[Avaliable on the Chrome Web Store](https://chrome.google.com/webstore/detail/canvas-dashboard-manager/bckjdddllidjailfhfoepmlcfpagdajh)
+~~[Avaliable on the Chrome Web Store](https://chrome.google.com/webstore/detail/canvas-dashboard-manager/bckjdddllidjailfhfoepmlcfpagdajh)~~
 
 ## Release History
 
