@@ -1,3 +1,5 @@
+# *This extension is no longer being maintained*
+
 ![](https://github.com/webbzac/Canvas-Dashboard-Manager/blob/master/git-assets/cdbm_logo-small.png?raw=true)
 # Canvas Dashboard Manager
 **A Chome Extension that adds the basic missing tools to Canvas' Dashboard**
@@ -29,3 +31,4 @@ See the [releases pages](https://github.com/webbzac/Canvas-Dashboard-Manager/rel
 [MIT License](https://github.com/webbzac/Canvas-Dashboard-Manager/blob/master/LICENSE)
 
 *This extension is not affiliated with or represented by Canvas or Instructure Inc.*
+ 
